@@ -4,7 +4,7 @@ This document describes the architecture of the enterprise cybersecurity lab.
 
 ## Architecture Diagram
 
-Diagram will be added here.
+![Architecture](enterprise-cybersecurity-Home-lab.png).
 
 ## Network Components
 
@@ -13,8 +13,9 @@ Diagram will be added here.
 - Windows Workstations
 - Kali Linux Attacker
 - Security Onion IDS
-- Splunk / Wazuh SIEM
+- Splunk / Wazuh SIEM / Elastic stack
 - DMZ Web Server
+- Security tools (OpenVAS, GoPhish, Malware Sandbox)
 
 ## Network Zones
 
