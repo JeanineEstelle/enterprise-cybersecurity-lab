@@ -1,9 +1,10 @@
-Documentation for the Enterprise Cybersecurity Lab.
+# Documentation
 
-This folder contains:
+This folder contains the full documentation for the Enterprise Cybersecurity Lab, including:
 
-- architecture diagrams
+- architecture
 - setup guides
 - screenshots
-- attack simulations
+- attack scenarios
 - detections
+- lessons learned
