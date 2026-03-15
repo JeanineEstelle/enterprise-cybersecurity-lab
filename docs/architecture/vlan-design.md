@@ -164,3 +164,40 @@ vlan 30
 
 vlan 40
  name SOC
+
+## **Congiguration of access port**
+
+interface fa0/2
+ switchport mode access
+ switchport access vlan 10
+
+interface fa0/3
+ switchport mode access
+ switchport access vlan 10
+
+interface fa0/4
+ switchport mode access
+ switchport access vlan 20
+
+interface fa0/5
+ switchport mode access
+ switchport access vlan 20
+
+interface fa0/6
+ switchport mode access
+ switchport access vlan 30
+
+interface fa0/7
+ switchport mode access
+ switchport access vlan 40
+
+
+## **Congiguration trunk port to router**
+
+interface fa0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40
+
+## Example of SPAN / PORT Mirroring
+monitor session 1 source vlan 10 , 20 , 30
+monitor session 1 destination interface fa0/7
