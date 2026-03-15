@@ -156,4 +156,21 @@ Detections are implemented using:
 
 # Lab Architecture Diagram
 
-See:
+See the architecture diagram here:
+
+![Enterprise Lab Architecture](docs/architecture/diagrams/enterprise-lab-diagram.png)
+
+# Skills Demonstrated
+
+This project demonstrates hands-on experience in:
+
+- Enterprise network segmentation
+- Firewall configuration
+- VLAN design
+- Active Directory administration
+- SOC monitoring
+- Threat detection
+- Incident response
+- SIEM engineering
+- Vulnerability management
+- Pentesting
