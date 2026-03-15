@@ -1,0 +1,240 @@
+# SOC Architecture
+
+This document describes the Security Operations Center (SOC) architecture implemented in the Enterprise Cybersecurity Lab.
+
+The SOC network collects, analyzes, and correlates security events generated across the enterprise infrastructure.
+
+The SOC environment provides:
+
+- centralized logging
+- intrusion detection
+- vulnerability scanning
+- threat hunting
+- incident response
+
+---
+
+# SOC Network
+
+The SOC environment is isolated in a dedicated VLAN.
+
+| VLAN | Network | Purpose |
+|-----|------|------|
+| VLAN 40 | 10.10.40.0/24 | Security monitoring infrastructure |
+
+The SOC network contains the security monitoring systems responsible for detecting threats across the enterprise network.
+
+---
+
+# SOC Components
+
+The SOC infrastructure includes the following tools.
+
+| Tool | Purpose |
+|-----|------|
+Security Onion | network monitoring and intrusion detection |
+Wazuh | host intrusion detection and log analysis |
+Splunk | SIEM platform for centralized log analysis |
+Elastic Stack | log ingestion and analytics |
+OpenVAS | vulnerability scanning and security assessment |
+
+---
+
+# Security Onion
+
+Security Onion is used for **network monitoring and intrusion detection**.
+
+It analyzes network traffic using:
+
+- Suricata
+- Zeek
+- Elastic dashboards
+
+Security Onion detects:
+
+- port scanning
+- brute force attempts
+- suspicious network traffic
+- malware communication
+
+Security Onion receives mirrored traffic from the switch using **SPAN / port mirroring**.
+
+---
+
+# Wazuh
+
+Wazuh provides **host-based intrusion detection (HIDS)**.
+
+Agents are installed on systems such as:
+
+- Windows servers
+- Windows workstations
+- Linux servers
+
+Wazuh monitors:
+
+- authentication activity
+- privilege escalation
+- file integrity changes
+- suspicious commands
+- malware behavior
+
+Logs collected by Wazuh are forwarded to the SIEM.
+
+---
+
+# Splunk
+
+Splunk acts as the **central SIEM platform**.
+
+Splunk collects logs from:
+
+- Windows event logs
+- firewall logs
+- Wazuh alerts
+- Security Onion alerts
+- application logs
+
+Splunk enables:
+
+- log search
+- correlation rules
+- threat detection
+- security dashboards
+
+Example detections include:
+
+- brute force login attempts
+- suspicious authentication activity
+- lateral movement indicators
+
+---
+
+# Elastic Stack
+
+Elastic Stack provides:
+
+- log ingestion
+- analytics
+- visualization dashboards
+
+Components include:
+
+- Elasticsearch
+- Logstash
+- Kibana
+- Beats agents
+
+Elastic Stack stores large volumes of log data and enables powerful search capabilities.
+
+---
+
+# OpenVAS
+
+OpenVAS is used for vulnerability management.
+
+OpenVAS scans systems across the network to identify:
+
+- missing security patches
+- vulnerable services
+- configuration weaknesses
+- known CVEs
+
+Example scan targets include:
+
+- DMZ web server
+- internal servers
+- workstations
+
+Results are used to improve security posture.
+
+---
+
+# Log Flow Architecture
+
+Security logs are collected from multiple sources.
+
+Sources include:
+
+- Windows domain controller
+- Windows workstations
+- web server
+- firewall logs
+- network traffic
+- attack simulations
+
+Logs are sent to the SOC infrastructure using:
+
+- Wazuh agents
+- Syslog forwarding
+- Winlogbeat
+- Filebeat
+
+These logs are ingested into Splunk and Elastic for analysis.
+
+---
+
+# Network Monitoring Flow
+
+Traffic monitoring works as follows:
+
+1. Network traffic passes through the switch.
+2. The switch mirrors traffic using SPAN.
+3. Mirrored traffic is sent to Security Onion.
+4. Security Onion analyzes traffic using Suricata and Zeek.
+5. Alerts are generated when suspicious behavior is detected.
+
+---
+
+# Detection Workflow
+
+Example detection process:
+
+1. Attacker launches a port scan using Kali Linux.
+2. Traffic reaches internal network through firewall.
+3. Security Onion detects abnormal network scanning.
+4. Alert is generated.
+5. Logs are forwarded to Splunk and Elastic.
+6. SOC analysts investigate the alert.
+
+---
+
+# Example SOC Investigation
+
+A SOC analyst can investigate events using:
+
+- Splunk search queries
+- Elastic dashboards
+- Security Onion alerts
+- Wazuh host monitoring
+
+Investigations may reveal:
+
+- suspicious authentication attempts
+- lateral movement between systems
+- malware communication
+- privilege escalation attempts
+
+---
+
+# Security Benefits of SOC Architecture
+
+The SOC architecture enables:
+
+- centralized monitoring
+- early threat detection
+- rapid incident response
+- improved security visibility
+
+This architecture reflects how many enterprise SOC environments are structured.
+
+---
+
+# Related Documentation
+
+See also:
+
+- `network-design.md`
+- `routing-design.md`
+- `firewall-architecture.md`
+- `attack-scenarios/`
