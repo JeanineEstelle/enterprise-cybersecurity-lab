@@ -1,4 +1,4 @@
-# Enterprise Cybersecurity Lab
+# Enterprise Cybersecurity and Networking Lab
 
 This project simulates a **real enterprise cybersecurity environment** combining:
 
