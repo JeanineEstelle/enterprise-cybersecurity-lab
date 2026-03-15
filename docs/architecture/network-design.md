@@ -1,73 +1,82 @@
-# Enterprise Cybersecurity Lab Network Design
+# Enterprise Lab Network Design
 
-## Overview
+This document describes the architecture and segmentation of the enterprise cybersecurity lab environment.
 
-This lab simulates a realistic enterprise IT environment to practice cybersecurity operations including threat detection, penetration testing, and incident response.
-
-The lab contains multiple segmented networks connected through a firewall.
+The lab simulates a real enterprise infrastructure with multiple network zones and security monitoring.
 
 ---
 
-## Network Zones
+# Network Zones
 
-### Internet
-Represents the public internet where the attacker machine resides.
+The environment is divided into four security zones.
 
-### WAN
-External network connected to the firewall.
-
-### Internal Network (LAN)
-Corporate network containing:
-
-- Active Directory Domain Controller
-- Windows Workstations
-- File Server
-
-### DMZ (Demilitarized Zone)
-Public-facing services such as a web server.
-
-### SOC Monitoring Network
-Security monitoring infrastructure including:
-
-- Splunk SIEM
-- Security Onion IDS
+| Zone | Purpose |
+|-----|------|
+| WAN | External network / Internet |
+| DMZ | Public-facing services |
+| Internal LAN | Corporate users and servers |
+| SOC Network | Security monitoring infrastructure |
 
 ---
 
-## Core Infrastructure
+# Network Diagram
 
-### Firewall
-pfSense firewall provides:
+See:
 
-- Network segmentation
+docs/architecture/diagrams/enterprise-lab-diagram.png
+
+---
+
+# IP Addressing Plan
+
+| Network | VLAN | Purpose |
+|------|------|------|
+| 192.168.100.0/24 | WAN | External attacker network |
+| 10.10.10.0/24 | VLAN 10 | Internal servers |
+| 10.10.20.0/24 | VLAN 20 | User workstations |
+| 10.10.30.0/24 | VLAN 30 | DMZ |
+| 10.10.40.0/24 | VLAN 40 | SOC monitoring |
+
+---
+
+# Infrastructure Components
+
+## Firewall
+
+pfSense firewall controls traffic between zones.
+
+Functions:
+
 - NAT
-- Firewall rules
-- traffic monitoring
-
-### Identity Infrastructure
-Active Directory manages:
-
-- Users
-- authentication
-- group policies
-
-### Monitoring Stack
-Security monitoring is handled by:
-
-- Splunk SIEM
-- Security Onion IDS
-- Wazuh EDR
+- firewall rules
+- network segmentation
+- traffic filtering
 
 ---
 
-## Security Goals
+## Router
 
-This lab environment allows testing of:
+Router R1 performs:
 
-- network reconnaissance
-- vulnerability scanning
-- lateral movement
-- privilege escalation
-- data exfiltration
-- SIEM detection
-- incident response
+- inter-VLAN routing
+- network segmentation
+- routing between VLANs
+
+---
+
+## Switch
+
+Switch SW1 performs:
+
+- VLAN segmentation
+- trunk ports
+- access ports
+- SPAN port for network monitoring
+
+---
+
+# VLAN Design
+
+## VLAN 10 — Servers
+
+Network:
